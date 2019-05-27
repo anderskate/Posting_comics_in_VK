@@ -21,7 +21,7 @@ af545f7gfdsfg6c374c6749551e0efef231ec89b17190f5d0aa44a58606ertgrega0c89b41906gwe
 ```
 ACCESS_TOKEN=af545f7gfdsfg6c374c6749551e0efef231ec89b17190f5d0aa44a58606ertgrega0c89b41906gwec
 ```
-Также в .env файл записываем ID группы, где будет происходить постинг:
+Также в .env файл записываем ID группы, куда будет происходить постинг:
 ```
 GROUP_ID=000000000
 ```
