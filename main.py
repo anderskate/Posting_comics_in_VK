@@ -19,8 +19,6 @@ def download_random_comic_and_get_name_with_title():
     with open(name, 'wb') as file:
         file.write(comic_image.content)
 
-    print('Downloaded comic')
-
     return name, comic_title
 
 
@@ -34,8 +32,6 @@ def get_server_address():
     response = requests.get(url, params=params)
     server_address = response.json()['response']['upload_url']
 
-    print('Got server address')
-
     return server_address
 
 
@@ -48,8 +44,6 @@ def upload_comic_to_server(server_address, comic_name):
     image_file_descriptor.close()
 
     server_info = response.json()
-
-    print('Uploaded comic to the server')
 
     return server_info
 
@@ -65,8 +59,6 @@ def save_comic(server_info):
                 'v': '5.61',
     }
     response = requests.post(url, params=params)
-
-    print('Saved photo comic in the album group')
 
     comic_information = response.json()['response'][0]
     return comic_information
@@ -90,8 +82,6 @@ def post_comic(saved_comic_info, comic_title):
     }
 
     response = requests.post(url, params=params)
-
-    print('Published comic')
 
 
 def main():
