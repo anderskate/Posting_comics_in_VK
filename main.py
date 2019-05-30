@@ -68,8 +68,8 @@ def post_comic(saved_comic_info, comic_title):
 
     url = 'https://api.vk.com/method/wall.post'
 
-    owner_id = str(saved_comic_info['owner_id'])
-    media_id = str(saved_comic_info['id'])
+    owner_id = saved_comic_info['owner_id']
+    media_id = saved_comic_info['id']
     attachments = 'photo{}_{}'.format(owner_id, media_id)
 
     params = {
