@@ -4,6 +4,11 @@ import os
 from dotenv import load_dotenv
 
 
+def check_response(response):
+    if not response.ok:
+        raise requests.exceptions.HTTPError()
+
+
 def download_random_comic_and_get_name_with_title():
     last_num_comic = requests.get('http://xkcd.com/info.0.json').json()['num']
     random_number = random.randint(1, last_num_comic + 1)
@@ -13,6 +18,7 @@ def download_random_comic_and_get_name_with_title():
     comic_link = response['img']
     comic_title = response['alt']
     comic_image = requests.get(comic_link)
+    check_response(comic_image)
     chunks_of_link = comic_link.split('/')
     name = chunks_of_link[len(chunks_of_link) - 1]
 
@@ -30,6 +36,8 @@ def get_server_address():
                 'v': '5.61',
     }
     response = requests.get(url, params=params)
+    check_response(response)
+
     server_address = response.json()['response']['upload_url']
 
     return server_address
@@ -41,6 +49,8 @@ def upload_comic_to_server(server_address, comic_name):
     files = {'photo': image_file_descriptor}
 
     response = requests.post(server_address, files=files)
+    check_response(response)
+
     image_file_descriptor.close()
 
     server_info = response.json()
@@ -59,6 +69,7 @@ def save_comic(server_info):
                 'v': '5.61',
     }
     response = requests.post(url, params=params)
+    check_response(response)
 
     comic_information = response.json()['response'][0]
     return comic_information
@@ -82,6 +93,7 @@ def post_comic(saved_comic_info, comic_title):
     }
 
     response = requests.post(url, params=params)
+    check_response(response)
 
 
 def main():
